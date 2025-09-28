@@ -1,0 +1,289 @@
+{
+  "evaluation_summary": {
+    "best_method": "vector",
+    "best_bleu_score": 0.014504512880575422,
+    "methods_compared": [
+      "baseline",
+      "vector",
+      "graph",
+      "hybrid"
+    ],
+    "total_questions": 48
+  },
+  "aggregate_statistics": {
+    "baseline": {
+      "num_questions": 12,
+      "bleu_score": {
+        "mean": 0.004074314372920316,
+        "std": 0.006429422271594872,
+        "min": 0.0010770431214218229,
+        "max": 0.024985713792297432
+      },
+      "rouge1_f": {
+        "mean": 0.06765623569697897,
+        "std": 0.032442139846375506
+      },
+      "rouge2_f": {
+        "mean": 0.018086834244890767,
+        "std": 0.0156850355496043
+      },
+      "rougeL_f": {
+        "mean": 0.05499815101964175,
+        "std": 0.026663560563291652
+      },
+      "by_difficulty": {
+        "easy": {
+          "mean_bleu": 0.009255319656270534,
+          "count": 3
+        },
+        "medium": {
+          "mean_bleu": 0.0021550874309745347,
+          "count": 5
+        },
+        "hard": {
+          "mean_bleu": 0.0025875940878398803,
+          "count": 4
+        }
+      }
+    },
+    "vector": {
+      "num_questions": 12,
+      "bleu_score": {
+        "mean": 0.014504512880575422,
+        "std": 0.011563474252851194,
+        "min": 0.0037643406986485163,
+        "max": 0.04695698720921546
+      },
+      "rouge1_f": {
+        "mean": 0.24283491959638648,
+        "std": 0.11420411395421606
+      },
+      "rouge2_f": {
+        "mean": 0.07943867987812549,
+        "std": 0.0662121734774616
+      },
+      "rougeL_f": {
+        "mean": 0.18180267687377705,
+        "std": 0.09729997052965364
+      },
+      "by_difficulty": {
+        "easy": {
+          "mean_bleu": 0.022928207435383208,
+          "count": 3
+        },
+        "medium": {
+          "mean_bleu": 0.01514381600514902,
+          "count": 5
+        },
+        "hard": {
+          "mean_bleu": 0.0073876130587525865,
+          "count": 4
+        }
+      }
+    },
+    "graph": {
+      "num_questions": 12,
+      "bleu_score": {
+        "mean": 0.011995425117443117,
+        "std": 0.010977809990360753,
+        "min": 0.0022355476119537724,
+        "max": 0.040918065342970766
+      },
+      "rouge1_f": {
+        "mean": 0.19075912945528084,
+        "std": 0.09911980819242501
+      },
+      "rouge2_f": {
+        "mean": 0.05167332435993371,
+        "std": 0.05219144889859938
+      },
+      "rougeL_f": {
+        "mean": 0.14580136716478784,
+        "std": 0.08235070477669121
+      },
+      "by_difficulty": {
+        "easy": {
+          "mean_bleu": 0.01916201393511659,
+          "count": 3
+        },
+        "medium": {
+          "mean_bleu": 0.012327532527872314,
+          "count": 5
+        },
+        "hard": {
+          "mean_bleu": 0.006205349241151517,
+          "count": 4
+        }
+      }
+    },
+    "hybrid": {
+      "num_questions": 12,
+      "bleu_score": {
+        "mean": 0.013990279016032435,
+        "std": 0.012066930157528317,
+        "min": 0.005389738117818599,
+        "max": 0.04695698720921546
+      },
+      "rouge1_f": {
+        "mean": 0.21951762115838322,
+        "std": 0.110185584631388
+      },
+      "rouge2_f": {
+        "mean": 0.07805965411894795,
+        "std": 0.06564817021872436
+      },
+      "rougeL_f": {
+        "mean": 0.17262533875400835,
+        "std": 0.09765334994235536
+      },
+      "by_difficulty": {
+        "easy": {
+          "mean_bleu": 0.022132033267909395,
+          "count": 3
+        },
+        "medium": {
+          "mean_bleu": 0.013821117386604853,
+          "count": 5
+        },
+        "hard": {
+          "mean_bleu": 0.008095415363909198,
+          "count": 4
+        }
+      }
+    }
+  },
+  "method_comparison": {
+    "bleu_score": {
+      "vector": {
+        "mean": 0.014504512880575422,
+        "count": 12
+      },
+      "baseline": {
+        "mean": 0.004074314372920316,
+        "count": 12
+      },
+      "graph": {
+        "mean": 0.011995425117443117,
+        "count": 12
+      },
+      "hybrid": {
+        "mean": 0.013990279016032435,
+        "count": 12
+      }
+    },
+    "rouge1_f": {
+      "vector": {
+        "mean": 0.24283491959638648,
+        "count": 12
+      },
+      "baseline": {
+        "mean": 0.06765623569697897,
+        "count": 12
+      },
+      "graph": {
+        "mean": 0.19075912945528084,
+        "count": 12
+      },
+      "hybrid": {
+        "mean": 0.21951762115838322,
+        "count": 12
+      }
+    },
+    "rouge2_f": {
+      "vector": {
+        "mean": 0.07943867987812549,
+        "count": 12
+      },
+      "baseline": {
+        "mean": 0.018086834244890767,
+        "count": 12
+      },
+      "graph": {
+        "mean": 0.05167332435993371,
+        "count": 12
+      },
+      "hybrid": {
+        "mean": 0.07805965411894795,
+        "count": 12
+      }
+    },
+    "rougeL_f": {
+      "vector": {
+        "mean": 0.18180267687377705,
+        "count": 12
+      },
+      "baseline": {
+        "mean": 0.05499815101964175,
+        "count": 12
+      },
+      "graph": {
+        "mean": 0.14580136716478784,
+        "count": 12
+      },
+      "hybrid": {
+        "mean": 0.17262533875400835,
+        "count": 12
+      }
+    }
+  },
+  "performance_analysis": {
+    "best_performance": [
+      {
+        "question_id": "q001",
+        "method": "vector",
+        "bleu_score": 0.04695698720921546,
+        "difficulty": "easy"
+      },
+      {
+        "question_id": "q001",
+        "method": "hybrid",
+        "bleu_score": 0.04695698720921546,
+        "difficulty": "easy"
+      },
+      {
+        "question_id": "q001",
+        "method": "graph",
+        "bleu_score": 0.040918065342970766,
+        "difficulty": "easy"
+      }
+    ],
+    "worst_performance": [
+      {
+        "question_id": "q006",
+        "method": "baseline",
+        "bleu_score": 0.0012332904530573147,
+        "difficulty": "hard"
+      },
+      {
+        "question_id": "q011",
+        "method": "baseline",
+        "bleu_score": 0.0011202218469415553,
+        "difficulty": "easy"
+      },
+      {
+        "question_id": "q008",
+        "method": "baseline",
+        "bleu_score": 0.0010770431214218229,
+        "difficulty": "medium"
+      }
+    ]
+  },
+  "total_evaluations": 48,
+  "available_metrics": {
+    "bleu": true,
+    "rouge": true,
+    "custom": true
+  },
+  "experiment_metadata": {
+    "name": "rag_benchmark_comparison_20250827_184001",
+    "methods_tested": [
+      "baseline",
+      "vector",
+      "graph",
+      "hybrid"
+    ],
+    "total_questions": 12,
+    "total_runtime": 159.9443759918213,
+    "timestamp": "2025-08-27 18:42:41"
+  }
+}

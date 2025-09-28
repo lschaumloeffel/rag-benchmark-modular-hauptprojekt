@@ -1,0 +1,13 @@
+id,question,expected_topics,difficulty,category
+q001,Erkläre mir RAG in einfachen Worten,"['RAG', 'retrieval', 'language model']",easy,basic
+q002,Was sind die Unterschiede zwischen Vektor- und Graph-Retrieval?,"['vector search', 'graph retrieval', 'comparison']",medium,comparison
+q003,Welche Evaluationsmetriken sollte ich für mein RAG-System verwenden?,"['BLEU', 'ROUGE', 'evaluation', 'metrics']",medium,technical
+q004,Wie optimiere ich die Performance meines RAG-Systems?,"['optimization', 'chunking', 'embeddings', 're-ranking']",hard,optimization
+q005,Was kostet der Betrieb eines RAG-Systems?,"['costs', 'pricing', 'infrastructure']",easy,business
+q006,Wie implementiere ich Hybrid Retrieval?,"['hybrid retrieval', 'dense', 'sparse', 'combination']",hard,technical
+q007,Welche Vector Database sollte ich wählen?,"['vector database', 'FAISS', 'Pinecone']",medium,infrastructure
+q008,Was sind häufige Probleme bei RAG und wie löse ich sie?,"['problems', 'troubleshooting', 'hallucination']",medium,troubleshooting
+q009,Wie funktioniert RAG mit Knowledge Graphs?,"['Neo4j', 'knowledge graph', 'Cypher']",hard,graph
+q010,Was ist der optimale Chunk-Size für meine Dokumente?,"['chunking', 'token size', 'preprocessing']",medium,preprocessing
+q011,Welche Zukunftstrends gibt es bei RAG?,"['future trends', 'agentic RAG', 'multi-modal']",easy,trends
+q012,Wie verbessere ich meine Embedding-Qualität?,"['embeddings', 'fine-tuning', 'optimization']",hard,optimization

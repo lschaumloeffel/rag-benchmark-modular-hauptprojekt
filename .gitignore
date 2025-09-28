@@ -1,0 +1,15 @@
+echo ".venv/
+__pycache__/
+.ipynb_checkpoints/
+.env
+*.env
+*.pyc
+.idea
+" > .gitignore
+
+# API Keys
+openai_key.txt
+*.key
+
+# Poetry
+poetry.lock

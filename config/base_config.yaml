@@ -1,0 +1,307 @@
+# RAG-Benchmark Hauptprojekt - Zentrale Konfiguration
+# Aufbau einer experimentellen Vergleichsumgebung für strukturierte
+# und unstrukturierte Retrievalmethoden
+#
+# Author: Lukas Schaumlöffel
+# Master Informatik (HAW Hamburg)
+
+# ============================================================================
+# EXPERIMENT SETUP
+# ============================================================================
+experiment:
+  name: "rag_benchmark_comparison"
+  version: "1.0"
+  description: "Vergleich von Vector-, Graph- und Hybrid-Retrieval Methoden"
+  output_dir: "../results"
+  log_level: "INFO"
+  save_intermediate_results: true
+
+# ============================================================================
+# DATA CONFIGURATION
+# ============================================================================
+data:
+  # FAQ Corpus Setup
+  corpus_file: "faq_korpus.json"
+  questions_file: "fragenliste.csv"
+  base_path: "./data"
+
+  # Data validation
+  min_corpus_size: 10
+  required_fields: ["id", "question", "answer", "category", "keywords"]
+
+  # Text preprocessing
+  preprocessing:
+    combine_qa: true  # Kombiniere Frage + Antwort für Embeddings
+    clean_text: true
+    extract_entities: true  # Für Graph-Retrieval
+    chunk_documents: false  # Für große Dokumente
+    chunk_size: 200
+    chunk_overlap: 50
+
+# ============================================================================
+# RETRIEVAL METHOD CONFIGURATIONS
+# ============================================================================
+retrieval:
+  # Vector Retrieval (FAISS + Sentence Transformers)
+  vector:
+    model: "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+    index_type: "flat"  # "flat" oder "ivf"
+    similarity_metric: "cosine"  # "cosine" oder "euclidean"
+    top_k: 3
+    similarity_threshold: 0.0
+    cache_embeddings: true
+    embedding_cache_path: "../data/embeddings_cache.pkl"
+
+  # Graph Retrieval (Neo4j + Entity Extraction)
+  graph:
+    # Neo4j Connection
+    neo4j_uri: "bolt://localhost:7687"
+    neo4j_user: "neo4j"
+    neo4j_password: "password"
+
+    # NLP Settings
+    spacy_model: "de_core_news_sm"
+    fallback_model: "en_core_web_sm"
+
+    # Retrieval Parameters
+    top_k: 3
+    traversal_depth: 2
+    min_entity_score: 1
+
+    # Scoring Weights
+    scoring_weights:
+      concept_match: 3
+      entity_match: 2
+      question_match: 2
+      answer_match: 1
+
+    # Graph Schema
+    create_constraints: true
+    clear_db_on_setup: true
+
+  # Hybrid Retrieval (Kombiniert Vector + Graph)
+  hybrid:
+    fusion_method: "weighted_sum"  # "weighted_sum", "rrf", "adaptive"
+    weight_vector: 0.6
+    weight_graph: 0.4
+    rrf_k: 60  # Parameter für Reciprocal Rank Fusion
+
+    # Normalization ranges für Score-Fusion
+    vector_score_range: [0.0, 1.0]
+    graph_score_range: [0, 15]
+
+    # Adaptive Fusion Settings (bei fusion_method: "adaptive")
+    adaptive_thresholds:
+      short_query_length: 5  # <= 5 Wörter: höhere Vector-Gewichtung
+      long_query_length: 10  # >= 10 Wörter: höhere Graph-Gewichtung
+      adaptive_vector_weight_short: 0.8
+      adaptive_graph_weight_short: 0.2
+      adaptive_vector_weight_long: 0.4
+      adaptive_graph_weight_long: 0.6
+
+# ============================================================================
+# LLM CONFIGURATION
+# ============================================================================
+llm:
+  # OpenAI API Settings
+  provider: "langchain_openai"
+  model: "gpt-4.1-nano"
+  api_key: null  # Wird über Environment Variable OPENAI_API_KEY geladen
+  
+  # Generation Parameters
+  max_tokens: 500 
+  temperature: 0.1
+  top_p: 0.9
+  frequency_penalty: 0.0
+  presence_penalty: 0.0
+
+  # Timeout Settings
+  timeout: 30  # Sekunden
+  max_retries: 3
+  backoff_factor: 2
+
+  # Prompt Templates
+  system_prompt: |
+    Du bist ein hilfreicher Assistent für Fragen zu Retrieval-Augmented Generation (RAG) 
+    und verwandten Technologien. Beantworte Fragen präzise und fachlich korrekt basierend 
+    auf den bereitgestellten Kontext-Informationen.
+
+  rag_prompt_template: |
+    Kontext-Informationen: {context}
+    
+    Frage: {question}
+    
+    Anweisungen:
+    - Beantworte die Frage basierend auf den bereitgestellten Kontext-Informationen
+    - Wenn die Informationen nicht ausreichen, sage das ehrlich
+    - Halte deine Antwort präzise und hilfreich
+    - Verwende die Fachbegriffe aus dem Kontext korrekt
+    
+    Antwort:
+
+  baseline_prompt_template: |
+    Du bist ein hilfreicher Assistent für Fragen zu Retrieval-Augmented Generation (RAG) 
+    und verwandten Technologien.
+    
+    Frage: {question}
+    
+    Beantworte die Frage basierend auf deinem allgemeinen Wissen über RAG, Machine Learning und AI.
+    
+    Antwort:
+
+# ============================================================================
+# EVALUATION CONFIGURATION
+# ============================================================================
+evaluation:
+  # Metrics to calculate
+  metrics: ["bleu", "rouge1", "rouge2", "rougeL"]
+
+  # BLEU Settings
+  bleu_smoothing: "method1"
+
+  # ROUGE Settings
+  rouge_metrics: ["rouge1", "rouge2", "rougeL"]
+  rouge_use_stemmer: true
+
+  # Custom RAG Metrics
+  custom_metrics: true
+  custom_metric_weights:
+    semantic_overlap: 0.3
+    answer_completeness: 0.3
+    factual_consistency: 0.2
+    response_coherence: 0.2
+
+  # Reference Answers (basierend auf dem FAQ-Korpus)
+  reference_answers:
+    q001: "RAG ist eine Technik, die Large Language Models mit externen Wissensquellen verbindet und so genauere, faktisch korrekte Antworten ermöglicht."
+    q002: "Vector-Retrieval nutzt Embeddings für semantische Ähnlichkeit, Graph-Retrieval strukturierte Beziehungen und Entitäten."
+    q003: "BLEU und ROUGE für Textqualität, Success Rate für Retrieval-Effektivität, Precision@k für Relevanz."
+    q004: "Optimierte Chunking-Strategien, Re-ranking, bessere Embeddings, Hybrid-Retrieval und Query-Expansion."
+    q005: "Kosten entstehen durch API-Calls, Infrastruktur für Vector-DBs und Compute-Ressourcen."
+    q006: "Kombination von Vector- und Graph-Retrieval mit Score-Fusion oder Reciprocal Rank Fusion."
+    q007: "FAISS für Entwicklung, Pinecone/Qdrant/Weaviate für Production - abhängig von Skalierung."
+    q008: "Halluzinationen, irrelevanter Context, Skalierung - Lösungen durch besseres Retrieval und Evaluation."
+    q009: "Knowledge Graphs strukturieren Wissen als Entitäten und Beziehungen für präzise, erklärbare Antworten."
+    q010: "Optimal 200-500 Tokens für Balance zwischen Kontext und Präzision, abhängig vom Use-Case."
+    q011: "Multimodales RAG, Agentic RAG, Graph-RAG, bessere Evaluation mit LLM-as-Judge."
+    q012: "Domain-spezifische Fine-tuning, bessere Chunking, negative Sampling und Feedback-Loops."
+
+  # Output Settings
+  output_format: "csv"
+  save_detailed_results: true
+  generate_plots: true
+  plot_formats: ["png", "pdf"]
+
+  # Statistical Analysis
+  confidence_level: 0.95
+  significance_tests: ["t_test", "wilcoxon"]
+
+# ============================================================================
+# METHODS TO COMPARE
+# ============================================================================
+methods:
+  enabled: ["baseline", "vector", "graph", "hybrid"]
+
+  # Method-specific settings
+  baseline:
+    description: "Pure LLM without retrieval"
+    use_system_prompt: true
+
+  vector:
+    description: "FAISS-based vector similarity search"
+    enable_reranking: false
+
+  graph:
+    description: "Neo4j knowledge graph traversal"
+    enable_entity_linking: true
+
+  hybrid:
+    description: "Combined vector and graph retrieval"
+    compare_fusion_methods: true
+
+# ============================================================================
+# LOGGING CONFIGURATION
+# ============================================================================
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  timestamp_format: "%Y-%m-%d %H:%M:%S"
+
+  # File logging
+  log_to_file: true
+  log_file: "../logs/rag_benchmark.log"
+  log_file_max_size: "10MB"
+  log_file_backup_count: 5
+
+  # Detailed logging options
+  log_retrieval_details: true
+  log_llm_requests: false  # Sensitive: API calls
+  log_evaluation_progress: true
+  log_memory_usage: false
+
+# ============================================================================
+# PERFORMANCE & OPTIMIZATION
+# ============================================================================
+performance:
+  # Parallel processing
+  enable_parallel_retrieval: true
+  max_workers: 4
+
+  # Caching
+  enable_caching: true
+  cache_dir: "../cache"
+  cache_expiry_hours: 24
+
+  # Memory management
+  batch_size: 10  # Für batch processing
+  clear_cache_on_start: false
+  gc_frequency: 100  # Garbage collection every N operations
+
+# ============================================================================
+# DEVELOPMENT & DEBUGGING
+# ============================================================================
+development:
+  debug_mode: false
+  profile_performance: false
+  save_intermediate_data: true
+
+  # Test settings
+  quick_test_mode: false  # Reduziert Datensets für schnelle Tests
+  test_sample_size: 3
+
+  # Validation
+  validate_config_on_load: true
+  strict_mode: false  # Fehlt bei Fehlern vs. Warnungen
+
+# ============================================================================
+# OUTPUT & REPORTING
+# ============================================================================
+output:
+  # Experiment results
+  save_raw_results: true
+  save_aggregated_results: true
+  save_comparison_matrix: true
+
+  # Report generation
+  generate_report: true
+  report_format: "html"  # html, pdf, markdown
+  include_plots: true
+  include_raw_data: false
+
+  # File naming
+  timestamp_files: true
+  experiment_id_in_filename: true
+
+  # Export formats
+  csv_separator: ","
+  csv_encoding: "utf-8"
+  json_indent: 2
+
+# ============================================================================
+# ENVIRONMENT VARIABLES
+# ============================================================================
+# Diese Werte werden zur Laufzeit aus Environment Variables geladen:
+# - OPENAI_API_KEY: OpenAI API Key
+# - NEO4J_PASSWORD: Neo4j Passwort (überschreibt config)
+# - RAG_EXPERIMENT_DIR: Basis-Verzeichnis (überschreibt Pfade)
+# - RAG_DEBUG: Debug-Modus aktivieren (true/false)

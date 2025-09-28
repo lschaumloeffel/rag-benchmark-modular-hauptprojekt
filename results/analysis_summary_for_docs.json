@@ -1,0 +1,50 @@
+{
+  "experiment_info": {
+    "methods_tested": [
+      "baseline",
+      "vector",
+      "graph",
+      "hybrid"
+    ],
+    "total_questions": 12,
+    "total_runs": 48
+  },
+  "bleu_results": {
+    "mean": {
+      "baseline": 0.0041,
+      "graph": 0.012,
+      "hybrid": 0.014,
+      "vector": 0.0145
+    },
+    "std": {
+      "baseline": 0.0067,
+      "graph": 0.0115,
+      "hybrid": 0.0126,
+      "vector": 0.0121
+    },
+    "count": {
+      "baseline": 12,
+      "graph": 12,
+      "hybrid": 12,
+      "vector": 12
+    }
+  },
+  "best_method": {
+    "name": "vector",
+    "bleu_score": 0.0145
+  },
+  "performance": {
+    "mean": {
+      "baseline": 4.955,
+      "graph": 2.206,
+      "hybrid": 1.798,
+      "vector": 1.918
+    },
+    "std": {
+      "baseline": 1.986,
+      "graph": 1.817,
+      "hybrid": 0.986,
+      "vector": 1.087
+    }
+  }
+}

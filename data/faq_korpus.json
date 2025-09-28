@@ -1,0 +1,183 @@
+[
+  {
+    "id": "doc_001",
+    "question": "Was ist Retrieval-Augmented Generation (RAG)?",
+    "answer": "RAG ist eine Technik, die Large Language Models mit externen Wissensquellen verbindet. Das Modell kann relevante Informationen aus einer Wissensbasis abrufen und diese in seine Antworten einbeziehen. Dies reduziert Halluzinationen und ermöglicht aktuellere Informationen.",
+    "category": "RAG Basics",
+    "keywords": [
+      "RAG",
+      "retrieval",
+      "language model",
+      "knowledge base"
+    ]
+  },
+  {
+    "id": "doc_002",
+    "question": "Wie funktioniert Vektorsuche in RAG-Systemen?",
+    "answer": "Bei der Vektorsuche werden Dokumente und Anfragen in hochdimensionale Vektoren (Embeddings) umgewandelt. Die Ähnlichkeit wird durch Cosinus-Ähnlichkeit oder andere Metriken gemessen. FAISS oder ähnliche Bibliotheken ermöglichen schnelle Suche in großen Vektorräumen.",
+    "category": "Vector Retrieval",
+    "keywords": [
+      "vector search",
+      "embeddings",
+      "FAISS",
+      "similarity"
+    ]
+  },
+  {
+    "id": "doc_003",
+    "question": "Was sind die Vorteile von Graph-basiertem Retrieval?",
+    "answer": "Graph-basiertes Retrieval kann Beziehungen zwischen Entitäten erfassen und komplexe, multi-hop Reasoning ermöglichen. Es ist besonders stark bei strukturierten Daten und kann Kontext durch Graphtraversierung liefern. Knowledge Graphs bieten explizite semantische Beziehungen.",
+    "category": "Graph Retrieval",
+    "keywords": [
+      "graph retrieval",
+      "knowledge graph",
+      "relationships",
+      "reasoning"
+    ]
+  },
+  {
+    "id": "doc_004",
+    "question": "Welche Evaluationsmetriken gibt es für RAG-Systeme?",
+    "answer": "Häufige Metriken sind BLEU und ROUGE für Textähnlichkeit, sowie Faithfulness und Answer Relevancy. GPT-as-a-Judge wird oft für qualitative Bewertung genutzt. Retrieval-Metriken wie Precision@K und Recall@K messen die Qualität der abgerufenen Dokumente.",
+    "category": "Evaluation",
+    "keywords": [
+      "BLEU",
+      "ROUGE",
+      "evaluation",
+      "metrics",
+      "GPT-judge"
+    ]
+  },
+  {
+    "id": "doc_005",
+    "question": "Was ist der Unterschied zwischen Dense und Sparse Retrieval?",
+    "answer": "Dense Retrieval nutzt neuronale Embeddings für semantische Ähnlichkeit, während Sparse Retrieval auf exakte Keyword-Matches setzt (wie BM25). Dense Retrieval ist besser für semantische Suche, Sparse Retrieval für exakte Begriff-Suche. Hybrid-Ansätze kombinieren beide.",
+    "category": "Retrieval Methods",
+    "keywords": [
+      "dense retrieval",
+      "sparse retrieval",
+      "BM25",
+      "embeddings"
+    ]
+  },
+  {
+    "id": "doc_006",
+    "question": "Wie wählt man die richtige Chunk-Größe für RAG?",
+    "answer": "Die Chunk-Größe hängt vom Use Case ab. Kleine Chunks (100-200 Tokens) bieten präzise Retrieval, große Chunks (500-1000 Tokens) mehr Kontext. Overlap zwischen Chunks verhindert Informationsverlust. Experimentierung mit verschiedenen Größen ist empfohlen.",
+    "category": "Data Processing",
+    "keywords": [
+      "chunking",
+      "token size",
+      "overlap",
+      "preprocessing"
+    ]
+  },
+  {
+    "id": "doc_007",
+    "question": "Was sind häufige Probleme bei RAG-Implementierungen?",
+    "answer": "Häufige Probleme sind: irrelevante Retrieval-Ergebnisse, Halluzinationen trotz RAG, hohe Latenz, Context-Window-Überschreitungen und schlechte Chunk-Qualität. Lösungen umfassen bessere Embeddings, Re-ranking, und optimierte Chunk-Strategien.",
+    "category": "Troubleshooting",
+    "keywords": [
+      "problems",
+      "hallucination",
+      "latency",
+      "context window"
+    ]
+  },
+  {
+    "id": "doc_008",
+    "question": "Welche Rolle spielt LangChain in RAG-Systemen?",
+    "answer": "LangChain bietet einen einheitlichen Framework für RAG-Implementierungen. Es abstrahiert Retriever, Vector Stores und LLM-Integrationen. Chain-Komponenten ermöglichen modulare Pipelines. LangChain vereinfacht die Integration verschiedener Tools und Datenquellen.",
+    "category": "Tools",
+    "keywords": [
+      "LangChain",
+      "framework",
+      "chains",
+      "integration"
+    ]
+  },
+  {
+    "id": "doc_009",
+    "question": "Wie funktioniert Re-ranking in RAG-Pipelines?",
+    "answer": "Re-ranking verbessert die initial abgerufenen Dokumente durch ein zweites Modell. Cross-encoder oder spezialisierte Re-ranking-Modelle bewerten Relevanz präziser als die erste Retrieval-Stufe. Dies kann die Antwortqualität signifikant verbessern.",
+    "category": "Advanced Techniques",
+    "keywords": [
+      "re-ranking",
+      "cross-encoder",
+      "two-stage retrieval"
+    ]
+  },
+  {
+    "id": "doc_010",
+    "question": "Was ist Hybrid Retrieval und wann sollte man es nutzen?",
+    "answer": "Hybrid Retrieval kombiniert verschiedene Retrieval-Methoden, typischerweise Dense und Sparse. Es nutzt die Stärken beider Ansätze: semantische Suche und exakte Keyword-Matches. Besonders effektiv bei diversen Query-Typen und großen Wissensbasen.",
+    "category": "Advanced Techniques",
+    "keywords": [
+      "hybrid retrieval",
+      "combination",
+      "dense",
+      "sparse"
+    ]
+  },
+  {
+    "id": "doc_011",
+    "question": "Welche Vector Databases sind für RAG geeignet?",
+    "answer": "Beliebte Optionen sind Pinecone, Weaviate, Qdrant und Chroma für managed Services. FAISS eignet sich für lokale Implementierungen. Die Wahl hängt von Skalierung, Latenz-Anforderungen und Budget ab. PostgreSQL mit pgvector ist eine kostengünstige Alternative.",
+    "category": "Infrastructure",
+    "keywords": [
+      "vector database",
+      "Pinecone",
+      "FAISS",
+      "Chroma"
+    ]
+  },
+  {
+    "id": "doc_012",
+    "question": "Wie optimiert man die Embedding-Qualität für RAG?",
+    "answer": "Fine-tuning von Embedding-Modellen auf domänenspezifische Daten verbessert Retrieval-Qualität. Auch die Wahl des Base-Models (OpenAI, Sentence-Transformers) ist wichtig. Preprocessing, Normalisierung und geeignete Similarity-Metriken spielen eine Rolle.",
+    "category": "Optimization",
+    "keywords": [
+      "embeddings",
+      "fine-tuning",
+      "domain-specific",
+      "similarity"
+    ]
+  },
+  {
+    "id": "doc_013",
+    "question": "Was sind die Kosten-Überlegungen bei RAG-Systemen?",
+    "answer": "Hauptkostenfaktoren sind LLM-API-Calls, Vector-Database-Hosting und Embedding-Generierung. Caching von Embeddings und Antworten reduziert Kosten. Lokale Modelle können API-Kosten eliminieren, benötigen aber eigene Infrastruktur.",
+    "category": "Business",
+    "keywords": [
+      "costs",
+      "pricing",
+      "API",
+      "caching",
+      "local models"
+    ]
+  },
+  {
+    "id": "doc_014",
+    "question": "Wie implementiert man RAG mit Neo4j?",
+    "answer": "Neo4j ermöglicht Graph-basiertes RAG durch Cypher-Queries. Entitäten und Beziehungen werden extrahiert und als Graph gespeichert. Retrieval erfolgt durch Graphtraversierung statt Vektorsuche. Dies ermöglicht komplexere, beziehungsbasierte Abfragen.",
+    "category": "Graph Implementation",
+    "keywords": [
+      "Neo4j",
+      "Cypher",
+      "graph traversal",
+      "entities"
+    ]
+  },
+  {
+    "id": "doc_015",
+    "question": "Welche Zukunftstrends gibt es bei RAG-Technologien?",
+    "answer": "Trends umfassen Agentic RAG mit Tool-Usage, Multi-modal RAG für Bilder/Videos, und Adaptive Retrieval basierend auf Query-Komplexität. Knowledge Graph-Integration wird wichtiger, ebenso Real-time Updates und personalisierte Retrieval-Strategien.",
+    "category": "Future Trends",
+    "keywords": [
+      "agentic RAG",
+      "multi-modal",
+      "adaptive retrieval",
+      "trends"
+    ]
+  }
+]

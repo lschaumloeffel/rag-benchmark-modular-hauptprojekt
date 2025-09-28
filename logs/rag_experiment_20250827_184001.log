@@ -1,0 +1,141 @@
+2025-08-27 18:40:01 - __main__ - INFO - ExperimentRunner initialisiert: config/base_config.yaml
+2025-08-27 18:40:01 - __main__ - INFO - === STARTE RAG-BENCHMARK EXPERIMENT ===
+2025-08-27 18:40:01 - __main__ - INFO - Lade Konfiguration: config/base_config.yaml
+2025-08-27 18:40:01 - src.validation.config_validator - INFO - ConfigValidator initialisiert (strict_mode: False)
+2025-08-27 18:40:01 - src.validation.config_validator - INFO - Konfiguration valid: 3 Warnungen
+2025-08-27 18:40:01 - src.validation.config_validator - WARNING - Configuration warnings:
+NEO4J_PASSWORD not set - using config value (less secure)
+Corpus file not found: faq_korpus.json (will be created if needed)
+Questions file not found: fragenliste.csv
+2025-08-27 18:40:01 - __main__ - INFO - Aktivierte Methoden: ['baseline', 'vector', 'graph', 'hybrid']
+2025-08-27 18:40:01 - __main__ - INFO - Lade Experiment-Daten...
+2025-08-27 18:40:01 - src.data.loader - INFO - DataLoader initialisiert mit base_path: data
+2025-08-27 18:40:01 - src.data.loader - INFO - FAQ-Korpus geladen: 15 Dokumente
+2025-08-27 18:40:01 - __main__ - INFO - FAQ-Korpus geladen: 15 Dokumente
+2025-08-27 18:40:01 - src.data.loader - INFO - Testfragen geladen: 12 Fragen
+2025-08-27 18:40:01 - __main__ - INFO - Test-Fragen geladen: 12 Fragen
+2025-08-27 18:40:01 - src.evaluation.evaluator - INFO - RAGEvaluator initialisiert
+2025-08-27 18:40:01 - src.evaluation.evaluator - INFO - Setup Experiment: rag_benchmark_comparison_20250827_184001
+2025-08-27 18:40:01 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-08-27 18:40:01 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-08-27 18:40:06 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2
+2025-08-27 18:40:09 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-08-27 18:40:09 - src.retrieval.vector_retrieval - INFO - VectorRetrieval initialisiert: sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 (dim: 384)
+2025-08-27 18:40:09 - src.retrieval.graph_retrieval - INFO - Neo4j-Verbindung hergestellt: bolt://localhost:7687
+2025-08-27 18:40:10 - src.retrieval.graph_retrieval - INFO - Spacy-Modell geladen: de_core_news_sm
+2025-08-27 18:40:10 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2
+2025-08-27 18:40:12 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-08-27 18:40:13 - src.retrieval.vector_retrieval - INFO - VectorRetrieval initialisiert: sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 (dim: 384)
+2025-08-27 18:40:13 - src.retrieval.graph_retrieval - INFO - Neo4j-Verbindung hergestellt: bolt://localhost:7687
+2025-08-27 18:40:13 - src.retrieval.graph_retrieval - INFO - Spacy-Modell geladen: de_core_news_sm
+2025-08-27 18:40:17 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-27 18:40:17 - src.evaluation.evaluator - INFO - LangChain LLM-Client erfolgreich initialisiert: gpt-4.1-nano
+2025-08-27 18:40:17 - absl - INFO - Using default tokenizer.
+2025-08-27 18:40:17 - src.evaluation.metrics - INFO - MetricsCalculator initialisiert
+2025-08-27 18:40:17 - src.evaluation.evaluator - INFO - Evaluation-Pipeline initialisiert
+2025-08-27 18:40:17 - src.evaluation.evaluator - INFO - Experiment setup abgeschlossen
+2025-08-27 18:40:17 - src.evaluation.evaluator - INFO - Starte komplette Evaluation...
+2025-08-27 18:40:17 - src.evaluation.evaluator - INFO - Setup vector pipeline mit 15 Dokumenten
+2025-08-27 18:40:18 - src.data.preprocessor - INFO - Spacy-Modell geladen: de_core_news_sm
+2025-08-27 18:40:18 - src.data.preprocessor - INFO - TextPreprocessor initialisiert mit Modell: de_core_news_sm
+2025-08-27 18:40:18 - src.data.preprocessor - INFO - Vector-Retrieval Vorbereitung: 15 Texte
+2025-08-27 18:40:18 - src.retrieval.vector_retrieval - INFO - Baue Index für 15 Dokumente...
+2025-08-27 18:40:19 - src.retrieval.vector_retrieval - INFO - Index aufgebaut in 1.48s - 15 Vektoren
+2025-08-27 18:40:19 - src.retrieval.vector_retrieval - INFO - Vector Retrieval Pipeline setup abgeschlossen
+2025-08-27 18:40:19 - src.evaluation.evaluator - INFO - Setup graph pipeline mit 15 Dokumenten
+2025-08-27 18:40:20 - src.data.preprocessor - INFO - Spacy-Modell geladen: de_core_news_sm
+2025-08-27 18:40:20 - src.data.preprocessor - INFO - TextPreprocessor initialisiert mit Modell: de_core_news_sm
+2025-08-27 18:40:21 - src.data.preprocessor - INFO - Graph-Retrieval Vorbereitung: 15 Dokumente
+2025-08-27 18:40:21 - src.retrieval.graph_retrieval - INFO - Baue Knowledge Graph für 15 Dokumente...
+2025-08-27 18:40:21 - neo4j.notifications - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Schema.IndexOrConstraintAlreadyExists} {category: SCHEMA} {title: `CREATE CONSTRAINT IF NOT EXISTS FOR (e:Document) REQUIRE (e.id) IS UNIQUE` has no effect.} {description: `CONSTRAINT constraint_3a9f7910 FOR (e:Document) REQUIRE (e.id) IS UNIQUE` already exists.} {position: None} for query: 'CREATE CONSTRAINT IF NOT EXISTS FOR (d:Document) REQUIRE d.id IS UNIQUE'
+2025-08-27 18:40:21 - neo4j.notifications - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Schema.IndexOrConstraintAlreadyExists} {category: SCHEMA} {title: `CREATE CONSTRAINT IF NOT EXISTS FOR (e:Entity) REQUIRE (e.name) IS UNIQUE` has no effect.} {description: `CONSTRAINT constraint_5adcbbfe FOR (e:Entity) REQUIRE (e.name) IS UNIQUE` already exists.} {position: None} for query: 'CREATE CONSTRAINT IF NOT EXISTS FOR (e:Entity) REQUIRE e.name IS UNIQUE'
+2025-08-27 18:40:21 - neo4j.notifications - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Schema.IndexOrConstraintAlreadyExists} {category: SCHEMA} {title: `CREATE CONSTRAINT IF NOT EXISTS FOR (e:Concept) REQUIRE (e.name) IS UNIQUE` has no effect.} {description: `CONSTRAINT constraint_daf53b FOR (e:Concept) REQUIRE (e.name) IS UNIQUE` already exists.} {position: None} for query: 'CREATE CONSTRAINT IF NOT EXISTS FOR (c:Concept) REQUIRE c.name IS UNIQUE'
+2025-08-27 18:40:21 - neo4j.notifications - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Schema.IndexOrConstraintAlreadyExists} {category: SCHEMA} {title: `CREATE CONSTRAINT IF NOT EXISTS FOR (e:Category) REQUIRE (e.name) IS UNIQUE` has no effect.} {description: `CONSTRAINT constraint_55fb0054 FOR (e:Category) REQUIRE (e.name) IS UNIQUE` already exists.} {position: None} for query: 'CREATE CONSTRAINT IF NOT EXISTS FOR (cat:Category) REQUIRE cat.name IS UNIQUE'
+2025-08-27 18:40:24 - src.retrieval.graph_retrieval - INFO - Knowledge Graph aufgebaut in 2.83s
+2025-08-27 18:40:24 - src.retrieval.graph_retrieval - INFO - Graph Retrieval Pipeline setup abgeschlossen
+2025-08-27 18:40:24 - src.evaluation.evaluator - INFO - Setup hybrid pipeline mit 15 Dokumenten
+2025-08-27 18:40:24 - src.retrieval.hybrid_retrieval - INFO - Setup Hybrid Retrieval Pipeline...
+2025-08-27 18:40:24 - src.data.preprocessor - INFO - Spacy-Modell geladen: de_core_news_sm
+2025-08-27 18:40:24 - src.data.preprocessor - INFO - TextPreprocessor initialisiert mit Modell: de_core_news_sm
+2025-08-27 18:40:24 - src.data.preprocessor - INFO - Vector-Retrieval Vorbereitung: 15 Texte
+2025-08-27 18:40:24 - src.retrieval.vector_retrieval - INFO - Baue Index für 15 Dokumente...
+2025-08-27 18:40:26 - src.retrieval.vector_retrieval - INFO - Index aufgebaut in 1.67s - 15 Vektoren
+2025-08-27 18:40:26 - src.retrieval.vector_retrieval - INFO - Vector Retrieval Pipeline setup abgeschlossen
+2025-08-27 18:40:27 - src.data.preprocessor - INFO - Spacy-Modell geladen: de_core_news_sm
+2025-08-27 18:40:27 - src.data.preprocessor - INFO - TextPreprocessor initialisiert mit Modell: de_core_news_sm
+2025-08-27 18:40:27 - src.data.preprocessor - INFO - Graph-Retrieval Vorbereitung: 15 Dokumente
+2025-08-27 18:40:27 - src.retrieval.graph_retrieval - INFO - Baue Knowledge Graph für 15 Dokumente...
+2025-08-27 18:40:27 - neo4j.notifications - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Schema.IndexOrConstraintAlreadyExists} {category: SCHEMA} {title: `CREATE CONSTRAINT IF NOT EXISTS FOR (e:Document) REQUIRE (e.id) IS UNIQUE` has no effect.} {description: `CONSTRAINT constraint_3a9f7910 FOR (e:Document) REQUIRE (e.id) IS UNIQUE` already exists.} {position: None} for query: 'CREATE CONSTRAINT IF NOT EXISTS FOR (d:Document) REQUIRE d.id IS UNIQUE'
+2025-08-27 18:40:27 - neo4j.notifications - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Schema.IndexOrConstraintAlreadyExists} {category: SCHEMA} {title: `CREATE CONSTRAINT IF NOT EXISTS FOR (e:Entity) REQUIRE (e.name) IS UNIQUE` has no effect.} {description: `CONSTRAINT constraint_5adcbbfe FOR (e:Entity) REQUIRE (e.name) IS UNIQUE` already exists.} {position: None} for query: 'CREATE CONSTRAINT IF NOT EXISTS FOR (e:Entity) REQUIRE e.name IS UNIQUE'
+2025-08-27 18:40:27 - neo4j.notifications - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Schema.IndexOrConstraintAlreadyExists} {category: SCHEMA} {title: `CREATE CONSTRAINT IF NOT EXISTS FOR (e:Concept) REQUIRE (e.name) IS UNIQUE` has no effect.} {description: `CONSTRAINT constraint_daf53b FOR (e:Concept) REQUIRE (e.name) IS UNIQUE` already exists.} {position: None} for query: 'CREATE CONSTRAINT IF NOT EXISTS FOR (c:Concept) REQUIRE c.name IS UNIQUE'
+2025-08-27 18:40:27 - neo4j.notifications - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Schema.IndexOrConstraintAlreadyExists} {category: SCHEMA} {title: `CREATE CONSTRAINT IF NOT EXISTS FOR (e:Category) REQUIRE (e.name) IS UNIQUE` has no effect.} {description: `CONSTRAINT constraint_55fb0054 FOR (e:Category) REQUIRE (e.name) IS UNIQUE` already exists.} {position: None} for query: 'CREATE CONSTRAINT IF NOT EXISTS FOR (cat:Category) REQUIRE cat.name IS UNIQUE'
+2025-08-27 18:40:30 - src.retrieval.graph_retrieval - INFO - Knowledge Graph aufgebaut in 2.74s
+2025-08-27 18:40:30 - src.retrieval.graph_retrieval - INFO - Graph Retrieval Pipeline setup abgeschlossen
+2025-08-27 18:40:30 - src.retrieval.hybrid_retrieval - INFO - HybridRetrieval initialisiert: weighted_sum (v:0.6, g:0.4)
+2025-08-27 18:40:30 - src.retrieval.hybrid_retrieval - INFO - Hybrid Retrieval Pipeline setup abgeschlossen
+2025-08-27 18:40:30 - src.evaluation.evaluator - INFO - Evaluiere Methode: baseline
+2025-08-27 18:40:32 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-27 18:40:37 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-27 18:40:45 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-27 18:40:50 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-27 18:40:53 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-27 18:40:59 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-27 18:41:03 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-27 18:41:10 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-27 18:41:16 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-27 18:41:21 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-27 18:41:24 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-27 18:41:30 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-27 18:41:30 - src.evaluation.evaluator - INFO - baseline: 12/12 erfolgreich
+2025-08-27 18:41:30 - src.evaluation.evaluator - INFO - Evaluiere Methode: vector
+2025-08-27 18:41:31 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-27 18:41:33 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-27 18:41:35 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-27 18:41:39 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-27 18:41:40 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-27 18:41:44 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-27 18:41:46 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-27 18:41:48 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-27 18:41:49 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-27 18:41:50 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-27 18:41:51 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-27 18:41:53 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-27 18:41:53 - src.evaluation.evaluator - INFO - vector: 12/12 erfolgreich
+2025-08-27 18:41:53 - src.evaluation.evaluator - INFO - Evaluiere Methode: graph
+2025-08-27 18:41:55 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-27 18:41:57 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-27 18:41:58 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-27 18:42:01 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-27 18:42:02 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-27 18:42:03 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-27 18:42:11 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-27 18:42:12 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-27 18:42:14 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-27 18:42:17 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-27 18:42:18 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-27 18:42:19 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-27 18:42:19 - src.evaluation.evaluator - INFO - graph: 12/12 erfolgreich
+2025-08-27 18:42:19 - src.evaluation.evaluator - INFO - Evaluiere Methode: hybrid
+2025-08-27 18:42:20 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-27 18:42:24 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-27 18:42:25 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-27 18:42:29 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-27 18:42:31 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-27 18:42:32 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-27 18:42:33 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-27 18:42:35 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-27 18:42:36 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-27 18:42:38 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-27 18:42:39 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-27 18:42:41 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-27 18:42:41 - src.evaluation.evaluator - INFO - hybrid: 12/12 erfolgreich
+2025-08-27 18:42:41 - src.evaluation.metrics - INFO - Evaluation: 1/48 Antworten
+2025-08-27 18:42:41 - src.evaluation.metrics - INFO - Evaluation: 11/48 Antworten
+2025-08-27 18:42:41 - src.evaluation.metrics - INFO - Evaluation: 21/48 Antworten
+2025-08-27 18:42:41 - src.evaluation.metrics - INFO - Evaluation: 31/48 Antworten
+2025-08-27 18:42:41 - src.evaluation.metrics - INFO - Evaluation: 41/48 Antworten
+2025-08-27 18:42:41 - src.evaluation.metrics - INFO - Batch-Evaluation abgeschlossen: 48 Ergebnisse
+2025-08-27 18:42:41 - src.evaluation.metrics - INFO - Evaluation-Ergebnisse exportiert: ..\results\evaluation_scores_20250827_184241.csv
+2025-08-27 18:42:41 - src.evaluation.evaluator - INFO - Alle Ergebnisse gespeichert in: ..\results
+2025-08-27 18:42:41 - src.evaluation.evaluator - INFO - Evaluation abgeschlossen in 159.96s
+2025-08-27 18:42:41 - __main__ - INFO - === EXPERIMENT ABGESCHLOSSEN (160.00s) ===

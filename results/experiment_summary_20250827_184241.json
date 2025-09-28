@@ -1,0 +1,43 @@
+{
+  "experiment": {
+    "name": "rag_benchmark_comparison_20250827_184001",
+    "methods_tested": [
+      "baseline",
+      "vector",
+      "graph",
+      "hybrid"
+    ],
+    "total_questions": 12,
+    "total_runtime": 159.9443759918213,
+    "timestamp": "2025-08-27 18:42:41"
+  },
+  "results": {
+    "best_method": "vector",
+    "best_bleu_score": 0.014504512880575422,
+    "methods_compared": [
+      "baseline",
+      "vector",
+      "graph",
+      "hybrid"
+    ],
+    "total_questions": 48
+  },
+  "method_ranking": [
+    [
+      "vector",
+      0.014504512880575422
+    ],
+    [
+      "hybrid",
+      0.013990279016032435
+    ],
+    [
+      "graph",
+      0.011995425117443117
+    ],
+    [
+      "baseline",
+      0.004074314372920316
+    ]
+  ]
+}
